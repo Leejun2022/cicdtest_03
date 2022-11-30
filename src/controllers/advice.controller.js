@@ -10,7 +10,6 @@ class AdviceController {
   // 조언 게시물 생성
   creatAdvice = async (req, res, next) => {
     const { userKey } = res.locals.user;
-
     if (userKey == 0) {
       return res.status(400).send({ message: "로그인이 필요합니다." });
     }
