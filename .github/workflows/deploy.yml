@@ -39,7 +39,7 @@ jobs:
           npm build
 
       - name: zip file
-        run: zip -r cicdtest.zip ./src ./scripts ./appspec.yml ./.env ./package.json
+        run: zip -r cicdtest_2.zip ./src ./scripts ./appspec.yml ./.env ./package.json
 
       - name: AWS connect
         uses: aws-actions/configure-aws-credentials@v1
@@ -49,11 +49,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./cicdtest.zip s3://build-bucket/public/
+        run: aws s3 cp --region ap-northeast-2 ./cicdtest_2.zip s3://cicdtest-jun/public/
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
           --application-name auto-build-gomin
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name auto-build-gomin
-          --s3-location bucket=build-bucket,bundleType=zip,key=public/cicdtest.zip
+          --s3-location bucket=cicdtest-jun,bundleType=zip,key=public/cicdtest_2.zip
