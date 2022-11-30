@@ -53,7 +53,7 @@ jobs:
 
       - name: deploy with AWS codeDeploy
         run: aws deploy create-deployment
-          --application-name auto-build-gomin
+          --application-name cicd-depoly-jun
           --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name auto-build-gomin
+          --deployment-group-name GROUP
           --s3-location bucket=cicdtest-jun,bundleType=zip,key=public/cicdtest_2.zip
